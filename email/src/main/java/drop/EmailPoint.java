@@ -16,75 +16,74 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
-//²âÊÔ
 public class EmailPoint {
      public static void main(String[] args) throws MessagingException {
 		  Properties props=new Properties();
-		  props.setProperty("mail.transport.protocol", "smtp");//ÓÊÏäĞ­Òé
-		  props.setProperty("mail.smtp.host", "smtp.qq.com");//Ğ­ÒéµØÖ·
-		  props.setProperty("mail.smtp.port", "465");//ÓÊÏä¶Ë¿Ú
-		  props.setProperty("mail.smtp.auth", "true");//ÓÊÏäÊÚÈ¨
-		  //163ÓÊÏäÖ»ĞèÅäÖÃÉÏÃæ
-		  //qq...ÆäËûÓÊÏäĞèÒªÅäÖÃssl°²È«ÈÏÖ¤
-		  props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");//Ö§³ÖsslÈÏÖ¤
-		  props.setProperty("mail.smtp.socketFactory.fallback", "false");//·ÇsslµÄÏûÏ¢²»´¦Àí
-		  props.setProperty("mail.smtp.socketFactory.port", "465");//ÈÏÖ¤¶Ë¿ÚºÅ
+		  props.setProperty("mail.transport.protocol", "smtp");//é‚®ç®±åè®®
+		  props.setProperty("mail.smtp.host", "smtp.qq.com");//åè®®åœ°å€
+		  props.setProperty("mail.smtp.port", "465");//é‚®ç®±ç«¯å£
+		  props.setProperty("mail.smtp.auth", "true");//é‚®ç®±æˆæƒ
+		  //163é‚®ç®±åªéœ€é…ç½®ä¸Šé¢
+		  //qq...å…¶ä»–é‚®ç®±éœ€è¦é…ç½®sslå®‰å…¨è®¤è¯
+		  props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");//æ”¯æŒsslè®¤è¯
+		  props.setProperty("mail.smtp.socketFactory.fallback", "false");//ésslçš„æ¶ˆæ¯ä¸å¤„ç†
+		  props.setProperty("mail.smtp.socketFactory.port", "465");//è®¤è¯ç«¯å£å·
 		  
     	 Session session=Session.getInstance(props);
     	 session.setDebug(true);
-		   //´´½¨ÓÊ¼ş
+		   //åˆ›å»ºé‚®ä»¶
     	 MimeMessage mime= createMimeMessage(session, "1978166566@qq.com", "1978166566@qq.com", "907236676@qq.com", "907236676@qq.com");
-    	 Transport tran=session.getTransport();//½¨Á¢Á¬½Ó¶ÔÏó
-    	 tran.connect("1978166566@qq.com","pwfirxbyxwyqdefd");//½¨Á¢Á¬½Ó,ÆäÖĞÃÜÂëÒÔÊÚÈ¨ÂëµÄ·½Ê½
-    	 tran.sendMessage(mime, mime.getAllRecipients());//·¢ËÍÓÊ¼ş
-    	 tran.close();//¹Ø±ÕÁ¬½Ó
+    	 Transport tran=session.getTransport();//å»ºç«‹è¿æ¥å¯¹è±¡
+    	 tran.connect("1978166566@qq.com","pwfirxbyxwyqdefd");//å»ºç«‹è¿æ¥,å…¶ä¸­å¯†ç ä»¥æˆæƒç çš„æ–¹å¼
+    	 tran.sendMessage(mime, mime.getAllRecipients());//å‘é€é‚®ä»¶
+    	 tran.close();//å…³é—­è¿æ¥
      }
      
      public  static MimeMessage createMimeMessage(Session session,String send,String receive,String cReceive,String mReceive) {
-    	 MimeMessage mime=new MimeMessage(session);//´´½¨ÓÊ¼ş
+    	 MimeMessage mime=new MimeMessage(session);//åˆ›å»ºé‚®ä»¶
     	 Address address;
 		try {
-			//ÉèÖÃ·¢¼şÈËĞÅÏ¢
-			//ÓÊ¼ş:±êÌâ,ÕıÎÄ,·¢¼şÈË,ÊÕ¼şÈË   (¸½¼ş,Í¼Æ¬)
-			address = new InternetAddress(send,"·¢¼şÈËÃû×Ö", "UTF-8");
+			//è®¾ç½®å‘ä»¶äººä¿¡æ¯
+			//é‚®ä»¶:æ ‡é¢˜,æ­£æ–‡,å‘ä»¶äºº,æ”¶ä»¶äºº   (é™„ä»¶,å›¾ç‰‡)
+			address = new InternetAddress(send,"å‘ä»¶äººåå­—", "UTF-8");
 			mime.setFrom(address);
-			mime.setSubject("ÕâÊÇ±êÌâ..»¹ÓĞÍ¼","UTF-8");
-			//Ìí¼ÓÍ¼Æ¬½Úµã
+			mime.setSubject("è¿™æ˜¯æ ‡é¢˜..è¿˜æœ‰å›¾","UTF-8");
+			//æ·»åŠ å›¾ç‰‡èŠ‚ç‚¹
 			MimeBodyPart image=new MimeBodyPart();
-			DataHandler  dh=new DataHandler(new FileDataSource("C:\\Users\\Ğí°îÖù\\Documents\\Tencent Files\\907236676\\FileRecv\\image\\13.jpg"));
-		    image.setDataHandler(dh);//ÉèÖÃÍ¼Æ¬
-		    image.setContentID("myImage");//ÉèÖÃÍ¼Æ¬ID
-		    //´´½¨ÎÄ±¾½Úµã,Ä¿µÄÊÇÎªÁË¼ÓÔØÍ¼Æ¬½Úµã
+			DataHandler  dh=new DataHandler(new FileDataSource("C:\\Users\\è®¸é‚¦æŸ±\\Documents\\Tencent Files\\907236676\\FileRecv\\image\\13.jpg"));
+		    image.setDataHandler(dh);//è®¾ç½®å›¾ç‰‡
+		    image.setContentID("myImage");//è®¾ç½®å›¾ç‰‡ID
+		    //åˆ›å»ºæ–‡æœ¬èŠ‚ç‚¹,ç›®çš„æ˜¯ä¸ºäº†åŠ è½½å›¾ç‰‡èŠ‚ç‚¹
 		     MimeBodyPart text=new MimeBodyPart();
-		     text.setContent("ÕıÎÄÄÚÈİ..image:<img src='cid:img'/>", "text/html;charset=utf-8");
+		     text.setContent("æ­£æ–‡å†…å®¹..image:<img src='cid:img'/>", "text/html;charset=utf-8");
 			
-		    //´´½¨¸´ºÏ½Úµã(×é×°ÎÄ±¾½ÚµãºÍÍ¼Æ¬½Úµã)
+		    //åˆ›å»ºå¤åˆèŠ‚ç‚¹(ç»„è£…æ–‡æœ¬èŠ‚ç‚¹å’Œå›¾ç‰‡èŠ‚ç‚¹)
 		     MimeMultipart mmu=new MimeMultipart();
-		     mmu.addBodyPart(text);//½«ÎÄ±¾½ÚµãÌí¼Óµ½¸´ºÏ½ÚµãÉÏ
-		     mmu.addBodyPart(image);//½«Í¼Æ¬½ÚµãÌí¼Óµ½¸´ºÏ½ÚµãÉÏ
-		     mmu.setSubType("related");//ÉèÖÃ¹ØÁª¹ØÏµ
-		     //×¢ÒâÕıÎÄÖĞÖ»ÄÜ³öÏÖÍ¼Æ¬½Úµã.²»ÄÜ³öÏÖ¸´ºÏ½Úµã
+		     mmu.addBodyPart(text);//å°†æ–‡æœ¬èŠ‚ç‚¹æ·»åŠ åˆ°å¤åˆèŠ‚ç‚¹ä¸Š
+		     mmu.addBodyPart(image);//å°†å›¾ç‰‡èŠ‚ç‚¹æ·»åŠ åˆ°å¤åˆèŠ‚ç‚¹ä¸Š
+		     mmu.setSubType("related");//è®¾ç½®å…³è”å…³ç³»
+		     //æ³¨æ„æ­£æ–‡ä¸­åªèƒ½å‡ºç°å›¾ç‰‡èŠ‚ç‚¹.ä¸èƒ½å‡ºç°å¤åˆèŠ‚ç‚¹
 		     MimeBodyPart conver=new MimeBodyPart();
-		     conver.setContent(mmu);//½«¸´ºÏ½Úµã×ª»»³ÉÆÕÍ¨½Úµã
-		     //Ìí¼Ó¸½¼ş
+		     conver.setContent(mmu);//å°†å¤åˆèŠ‚ç‚¹è½¬æ¢æˆæ™®é€šèŠ‚ç‚¹
+		     //æ·»åŠ é™„ä»¶
 		     MimeBodyPart atta=new MimeBodyPart();
-		     DataHandler dah=new DataHandler(new FileDataSource("D:\\×ªÒÆÎÄ¼ş\\Desktop\\S2\\Y2\\Y2\\Maven\\MavneT02\\Á·Ï°.txt"));
-		     atta.setDataHandler(dah);//ÉèÖÃ¸½¼ş
-		     //¸ø¸½¼şÉèÖÃÎÄ¼şÃû(´¦ÀíÖĞÎÄÂÒÂë)
+		     DataHandler dah=new DataHandler(new FileDataSource("D:\\è½¬ç§»æ–‡ä»¶\\Desktop\\S2\\Y2\\Y2\\Maven\\MavneT02\\ç»ƒä¹ .txt"));
+		     atta.setDataHandler(dah);//è®¾ç½®é™„ä»¶
+		     //ç»™é™„ä»¶è®¾ç½®æ–‡ä»¶å(å¤„ç†ä¸­æ–‡ä¹±ç )
 		     atta.setFileName(MimeUtility.encodeText(dah.getName()));
-		     //×éºÏ½Úµã
+		     //ç»„åˆèŠ‚ç‚¹
 		     MimeMultipart mmu2=new MimeMultipart();
 		     mmu2.addBodyPart(conver);
 		     mmu2.addBodyPart(atta);
-		     mmu2.setSubType("mixed");//¸½¼şºÍÎÄ±¾Í¼Æ¬ÊÇ»ìºÏ¹ØÏµ
+		     mmu2.setSubType("mixed");//é™„ä»¶å’Œæ–‡æœ¬å›¾ç‰‡æ˜¯æ··åˆå…³ç³»
 		     mime.setContent(mmu2,"text/html;charset=utf-8");
-		     //ÊÕ¼şÈËÀàĞÍ:TOÆÕÍ¨ÊÕ¼şÈË,cc³­ËÍ,bccÃÜËÍ
-			mime.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receive,"ÊÕ¼şÈËÃû×Ö", "UTF-8"));
-			mime.setRecipient(MimeMessage.RecipientType.CC, new InternetAddress(cReceive,"³­ËÍÈËÃû×Ö", "UTF-8"));
-			mime.setRecipient(MimeMessage.RecipientType.BCC, new InternetAddress(mReceive,"ÃÜËÍÈËÃû×Ö", "UTF-8"));
-			//ÉèÖÃ·¢¼şÊ±¼ä
+		     //æ”¶ä»¶äººç±»å‹:TOæ™®é€šæ”¶ä»¶äºº,ccæŠ„é€,bccå¯†é€
+			mime.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(receive,"æ”¶ä»¶äººåå­—", "UTF-8"));
+			mime.setRecipient(MimeMessage.RecipientType.CC, new InternetAddress(cReceive,"æŠ„é€äººåå­—", "UTF-8"));
+			mime.setRecipient(MimeMessage.RecipientType.BCC, new InternetAddress(mReceive,"å¯†é€äººåå­—", "UTF-8"));
+			//è®¾ç½®å‘ä»¶æ—¶é—´
 			mime.setSentDate(new Date());
-			//±£´æÓÊ¼ş
+			//ä¿å­˜é‚®ä»¶
 			mime.saveChanges();
 			return mime;
 		} catch (UnsupportedEncodingException e) {
