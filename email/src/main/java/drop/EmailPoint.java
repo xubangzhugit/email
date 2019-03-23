@@ -16,7 +16,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
-
+//≤‚ ‘
 public class EmailPoint {
      public static void main(String[] args) throws MessagingException {
 		  Properties props=new Properties();
