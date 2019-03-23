@@ -17,6 +17,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 public class EmailPoint {
+	//abc冲突
      public static void main(String[] args) throws MessagingException {
 		  Properties props=new Properties();
 		  props.setProperty("mail.transport.protocol", "smtp");//邮箱协议
