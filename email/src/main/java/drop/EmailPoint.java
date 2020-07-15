@@ -37,7 +37,7 @@ public class EmailPoint {
     	 Transport tran=session.getTransport();//建立连接对象
     	 tran.connect("1978166566@qq.com","pwfirxbyxwyqdefd");//建立连接,其中密码以授权码的方式
     	 tran.sendMessage(mime, mime.getAllRecipients());//发送邮件
-    	 tran.close();//关闭连接
+    	 tran.close();//关闭连接1
      }
      
      public  static MimeMessage createMimeMessage(Session session,String send,String receive,String cReceive,String mReceive) {
