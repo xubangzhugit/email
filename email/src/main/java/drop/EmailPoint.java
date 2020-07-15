@@ -17,7 +17,7 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 public class EmailPoint {
-	//解决冲突 
+	//解决冲突
      public static void main(String[] args) throws MessagingException {
 		  Properties props=new Properties();
 		  props.setProperty("mail.transport.protocol", "smtp");//邮箱协议
@@ -32,7 +32,7 @@ public class EmailPoint {
 		  
     	 Session session=Session.getInstance(props);
     	 session.setDebug(true);
-		   //创建邮件  
+		   //创建邮件
     	 MimeMessage mime= createMimeMessage(session, "1978166566@qq.com", "1978166566@qq.com", "907236676@qq.com", "907236676@qq.com");
     	 Transport tran=session.getTransport();//建立连接对象
     	 tran.connect("1978166566@qq.com","pwfirxbyxwyqdefd");//建立连接,其中密码以授权码的方式
